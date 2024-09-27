@@ -1,21 +1,16 @@
 let humanScore = 0, computerScore = 0, round = 0;
+let computerChoice, result, score, roundText;
 
-function getComputerChoise() {
+function getComputerChoice() {
 
     const choices = ['rock', 'paper','scissors'];
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
-function getHumanChoice() {
-    const prompt = require("prompt-sync")({ sigint: true });
-    let humanChoice = prompt("Rock, Paper or Scissors wright your choice... ");
-    return humanChoice;
-}
-
 function playRound(humanChoice, computerChoice) {
 
     if (humanChoice === computerChoice) {
-        console.log ('Your choice is same with computer choice');
+        result = 'Your choice is same with computer choice';
     }
     else if (
         (humanChoice.toLowerCase() === "rock" && computerChoice === "scissors") ||
@@ -23,30 +18,31 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice.toLowerCase() === "paper" && computerChoice === "rock")
     ) {
         humanScore++;
-        console.log ( `You win! ${humanChoice.toLowerCase()}  beats ${computerChoice}`);
+        result = `You win! ${humanChoice.toLowerCase()}  beats ${computerChoice}`;
     } else {
 
         computerScore++;
-        console.log(`You lost! ${computerChoice}  beats ${humanChoice.toLowerCase()}`);
+        result = `You lost! ${computerChoice}  beats ${humanChoice.toLowerCase()}`;
     }
 }
 
-function playGame() { 
+function playGame(humanChoice) {
+    computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+    round++;
+    roundText = `Round ${round}: You: ${humanScore}, Computer: ${computerScore}`;
 
-    while (round < 5) {
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoise()
-        playRound(humanChoice, computerChoice);
-        round++;
-        console.log(`Round ${round}: You: ${humanScore}, Computer: ${computerScore}`);
-    }
-    if (humanScore > computerScore){
+    if (round >= 5) { 
+        if (humanScore > computerScore) {
+            score = `Congratulations! You won the game! Computer: ${computerScore}, You: ${humanScore}`;
+        } else if (humanScore < computerScore) {
+            score = `Sorry, you lost the game. Computer: ${computerScore}, You: ${humanScore}`;
+        } else {
+            score = `It's a draw! Computer: ${computerScore}, You: ${humanScore}`;
+        }
 
-        console.log(`Congratulations! You won the game! Computer: ${computerScore}, you: ${humanScore}` );
-    } else {
-
-        console.log(`Sorry, you lost the game. Computer: ${computerScore}, you: ${humanScore}`);
+        humanScore = 0;
+        computerScore = 0;
+        round = 0;
     }
 }
-
-playGame();

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+<script type="text/javascript" src="tas-kagit-makas.js">
+
+</script>
+
+
+</head>
+    <body>
+        <div id="container">
+            <button id="rock">Rock</button>
+            <button id="paper">Paper</button>
+            <button id="scissors">Scissors</button>
+        </div>
+        <br>
+        <div>
+            <p>Your choice: <span id="yourChoice"></span></p>
+            <p>Computer's choice: <span id="computerChoice"></span></p>
+            <p>Result: <span id="gameResult"></span></p>
+            <p><span id="round"></span></p>
+            <p>Score: <span id="score"></span></p>
+        </div>
+        <script type="text/javascript">
+            const btnRock = document.querySelector("#rock");
+            const btnPaper = document.querySelector("#paper");
+            const btnScissors = document.querySelector("#scissors");
+            const humanChoice = document.querySelector("#yourChoice");
+            const comChoice = document.querySelector("#computerChoice");
+            const resultElement = document.querySelector("#gameResult");
+            const scoreElement = document.querySelector("#score");
+            const roundElement = document.querySelector("#round");
+
+            function displayComputerChoice() {
+
+                comChoice.textContent = computerChoice;
+            }
+
+            btnRock.addEventListener("click", () => {
+                playGame("rock");
+                humanChoice.textContent = "You chose: Rock";
+                displayComputerChoice();
+                scoreElement.textContent = score;
+                roundElement.textContent = roundText;
+                resultElement.textContent = result;
+            });
+
+            btnPaper.addEventListener("click", () => {
+                playGame("paper");
+                humanChoice.textContent = "You chose: Paper";
+                displayComputerChoice();
+                scoreElement.textContent = score;
+                roundElement.textContent = roundText;
+                resultElement.textContent = result;
+            });
+
+            btnScissors.addEventListener("click", () => {
+                playGame("scissors");
+                humanChoice.textContent = "You chose: Scissors";
+                displayComputerChoice();
+                scoreElement.textContent = score;
+                roundElement.textContent = roundText;
+                resultElement.textContent = result;
+            });    
+        </script>
+    </body>
+</html>
